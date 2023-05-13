@@ -173,6 +173,7 @@ let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
 
 
+
 function cargarProductos(productosElegidos){
 
     contenedorProductos.innerHTML = '';
@@ -231,9 +232,9 @@ function actualizarBotonesAgregar(){
 
 let productosEnCarrito;
 
-const productosEnCarritoLS = JSON.parse(localStorage.getItem('productosEnCarrito'));
+let productosEnCarritoLS = localStorage.getItem('productosEnCarrito');
 if (productosEnCarritoLS) {
-    productosEnCarrito = productosEnCarritoLS
+    productosEnCarrito = JSON.parse(productosEnCarritoLS);
     actualizarNumerito();
 }else{
     productosEnCarrito = [];

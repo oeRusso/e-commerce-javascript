@@ -1,15 +1,19 @@
-const productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito'));
+let productosEnCarrito = localStorage.getItem('productosEnCarrito');
+productosEnCarrito = JSON.parse(productosEnCarrito);
+
 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
 const contenedorCarritoProductos = document.querySelector("#carrito-productos");
 const contenedorCarritoAcciones = document.querySelector("#carrito-acciones");
 const contenedorCarritoComprado = document.querySelector("#carrito-comprado");
 let botonEliminar = document.querySelectorAll(".carrito-producto-eliminar");
+const botonVaciar = document.querySelector(".carrito-acciones-vaciar");
+const contenedorTotal = document.querySelector("#total");
 
 
 function cargarProductosCarrito(){
-    if (productosEnCarrito) {
-    
+    if (productosEnCarrito && productosEnCarrito.length > 0) {
+
         contenedorCarritoVacio.classList.add("disabled");
         contenedorCarritoProductos.classList.remove("disabled");
         contenedorCarritoAcciones.classList.remove("disabled");
@@ -84,8 +88,18 @@ function eliminarDelCarrito(e){
 
 }
 
+botonVaciar.addEventListener("click", vaciarCarrito);
+
+function vaciarCarrito(){
+    productosEnCarrito.length=0;
+    localStorage.setItem('productosEnCarrito',JSON.stringify(productosEnCarrito));
+    cargarProductosCarrito();
+}
 
 
-// TODO: min 2hs 10min.
+function actualizarTotal(){
 
-// FIXME: fijate las modificaciones que hice con el localstorage en el codigo, para vos no fue necesaria pero hay que ver si para lo proximo que va ser si es necesario hacer esos cambios
+}
+// TODO: min 2hs 17min.
+
+// FIXME: 
