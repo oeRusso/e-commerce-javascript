@@ -9,6 +9,8 @@ const contenedorCarritoComprado = document.querySelector("#carrito-comprado");
 let botonEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 const botonVaciar = document.querySelector(".carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
+const botonComprar = document.querySelector(".carrito-acciones-comprar");
+
 
 
 function cargarProductosCarrito(){
@@ -60,6 +62,7 @@ function cargarProductosCarrito(){
         contenedorCarritoComprado.classList.add("disabled");
     }
     actualizarBotonesEliminar();
+    actualizarTotal()
 }
 
 
@@ -99,7 +102,20 @@ function vaciarCarrito(){
 
 function actualizarTotal(){
 
-}
-// TODO: min 2hs 17min.
+    const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad),0);
+    contenedorTotal.innerText = `$${totalCalculado}`;
 
-// FIXME: 
+}
+
+botonComprar.addEventListener("click", comprarCarrito);
+
+function comprarCarrito(){
+    productosEnCarrito.length=0;
+    localStorage.setItem('productosEnCarrito',JSON.stringify(productosEnCarrito));
+    
+
+    contenedorCarritoVacio.classList.add("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    contenedorCarritoComprado.classList.remove("disabled");
+}
